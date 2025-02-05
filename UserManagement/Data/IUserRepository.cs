@@ -40,5 +40,12 @@ namespace UserManagement.Data
         /// <param name="id">The unique identifier of the user to delete.</param>
         /// <returns>True if the user was deleted, false if not found.</returns>
         Task<bool> DeleteUserAsync(Guid id);
+
+        /// <summary>
+        /// Retrieves a list of users whose email matches the given email address.
+        /// </summary>
+        /// <param name="email">The email address to search for.</param>
+        /// <returns>A list of users with the specified email address.</returns>
+        Task<List<User>> GetUsersByEmail(string email);
     }
 }

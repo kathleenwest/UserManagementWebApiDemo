@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Moq;
 using UserManagement.Data;
 using UserManagement.Models;
 
@@ -330,6 +331,32 @@ namespace UserManagement.Tests.Services
             // Assert
             // Assert that the result is false, indicating the user does not exist
             Assert.False(result);
+        }
+
+        /// <summary>
+        /// Tests that GetUsersByEmail returns users with the matching email address.
+        /// </summary>
+        [Fact]
+        public async Task GetUsersByEmail_ReturnsUsersWithMatchingEmail()
+        {
+            // Act
+            List<User> result = await _userRepository.GetUsersByEmail("john.doe@example.com");
+
+            // Assert
+            Assert.All(result, user => Assert.Equal("john.doe@example.com", user.Email)); // Verify all users have the expected email
+        }
+
+        /// <summary>
+        /// Tests that GetUsersByEmail returns an empty list when no users match the email address.
+        /// </summary>
+        [Fact]
+        public async Task GetUsersByEmail_ReturnsEmptyListWhenNoMatchingEmail()
+        {
+            // Act
+            List<User> result = await _userRepository.GetUsersByEmail("nonexistent@example.com");
+
+            // Assert
+            Assert.Empty(result); // Verify that no users are returned
         }
     }
 }

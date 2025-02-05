@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Moq;
 using UserManagement.Models;
+using Xunit;
 
 namespace UserManagement.Data
 {
@@ -115,6 +117,19 @@ namespace UserManagement.Data
             await _dbContext.SaveChangesAsync();
 
             return true;
+        }
+
+        /// <summary>
+        /// Retrieves a list of users whose email matches the given email address.
+        /// </summary>
+        /// <param name="email">The email address to search for.</param>
+        /// <returns>A list of users with the specified email address.</returns>
+        public async Task<List<User>> GetUsersByEmail(string email)
+        {
+            // Perform a LINQ query on the Users DbSet to find users with the specified email address
+            return await _dbContext.Users
+                             .Where(user => user.Email == email) // Filter users by email
+                             .ToListAsync(); // Convert the query result to a list
         }
     }
 }
