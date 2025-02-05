@@ -1,0 +1,23 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@example.com",
+    "dateOfBirth": "2007-02-04T00:00:00",
+    "phoneNumber": "1234567890"
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "janedoe@example.com",
+    "dateOfBirth": "2002-02-04T00:00:00",
+    "phoneNumber": "0987654321"
+  },
+  {
+    "firstName": "Alice",
+    "lastName": "Smith",
+    "email": "alicesmith@example.com",
+    "dateOfBirth": "2000-02-04T00:00:00",
+    "phoneNumber": "1122334455"
+  }
+]

@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UserManagement</name>
+    </assembly>
+    <members>
+        <member name="M:UserManagement.Controllers.ErrorController.Error">
+            <summary>
+            Handles errors and logs the relevant information.
+            </summary>
+            <returns>An IActionResult representing the problem details.</returns>
+        </member>
+        <member name="T:UserManagement.Controllers.UsersController">
+            <summary>
+            Web API actions for User Management application.
+            </summary>
+        </member>
+        <member name="F:UserManagement.Controllers.UsersController._userService">
+            <summary>
+            Service for user management operations.
+            </summary>
+        </member>
+        <member name="F:UserManagement.Controllers.UsersController._logger">
+            <summary>
+            Logger for logging information.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Controllers.UsersController.#ctor(UserManagement.Services.IUserService,Microsoft.Extensions.Logging.ILogger{UserManagement.Controllers.UsersController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:UserManagement.Controllers.UsersController"/> class.
+            </summary>
+            <param name="userService">Service for user management operations.</param>
+            <param name="logger">Logger for logging information.</param>
+        </member>
+        <member name="M:UserManagement.Controllers.UsersController.CreateUser(UserManagement.Models.User)">
+            <summary>
+            Creates a new user.
+            POST /api/users
+            </summary>
+            <param name="user">The user object to create.</param>
+            <returns>The created user object.</returns>
+        </member>
+        <member name="M:UserManagement.Controllers.UsersController.GetUsers">
+            <summary>
+            Retrieves a list of all users.
+            GET /api/users
+            </summary>
+            <returns>A list of user objects.</returns>
+        </member>
+        <member name="M:UserManagement.Controllers.UsersController.GetUserById(System.Guid)">
+            <summary>
+            Retrieves a user by their ID.
+            GET /api/users/{id}
+            </summary>
+            <param name="id">The unique identifier of the user.</param>
+            <returns>The user object.</returns>
+        </member>
+        <member name="M:UserManagement.Controllers.UsersController.UpdateUser(System.Guid,UserManagement.Models.User)">
+            <summary>
+            Updates an existing user.
+            PUT /api/users/{id}
+            </summary>
+            <param name="id">The unique identifier of the user to update.</param>
+            <param name="user">The user object with updated information.</param>
+            <returns>The updated user object.</returns> 
+        </member>
+        <member name="M:UserManagement.Controllers.UsersController.DeleteUser(System.Guid)">
+            <summary>
+            Deletes a user by their ID.
+            DELETE /api/users/{id}
+            </summary>
+            <param name="id">The unique identifier of the user to delete.</param>
+            <returns>No content if the user was deleted.</returns>
+        </member>
+        <member name="T:UserManagement.Data.IUserRepository">
+            <summary>
+            Interface for user repository that defines methods for user management operations.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Data.IUserRepository.CreateUserAsync(UserManagement.Models.User)">
+            <summary>
+            Creates a new user asynchronously.
+            </summary>
+            <param name="user">The user object to create.</param>
+            <returns>The created user object.</returns>
+        </member>
+        <member name="M:UserManagement.Data.IUserRepository.GetUsersAsync">
+            <summary>
+            Retrieves all users asynchronously.
+            </summary>
+            <returns>A list of user objects.</returns>
+        </member>
+        <member name="M:UserManagement.Data.IUserRepository.GetUserByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user.</param>
+            <returns>The user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Data.IUserRepository.UpdateUserAsync(UserManagement.Models.User)">
+            <summary>
+            Updates an existing user asynchronously.
+            </summary>
+            <param name="user">The user object with updated information.</param>
+            <returns>The updated user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Data.IUserRepository.DeleteUserAsync(System.Guid)">
+            <summary>
+            Deletes a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user to delete.</param>
+            <returns>True if the user was deleted, false if not found.</returns>
+        </member>
+        <member name="T:UserManagement.Data.UserRepository">
+            <summary>
+            Repository for managing user data.
+            </summary>
+        </member>
+        <member name="F:UserManagement.Data.UserRepository._dbContext">
+            <summary>
+            The database context for user data.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Data.UserRepository.#ctor(UserManagement.Models.UserDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UserManagement.Data.UserRepository"/> class.
+            </summary>
+            <param name="dbContext">The database context for user data.</param>
+        </member>
+        <member name="M:UserManagement.Data.UserRepository.CreateUserAsync(UserManagement.Models.User)">
+            <summary>
+            Creates a new user asynchronously.
+            </summary>
+            <param name="user">The user object to create.</param>
+            <returns>The created user object.</returns>
+        </member>
+        <member name="M:UserManagement.Data.UserRepository.GetUsersAsync">
+            <summary>
+            Retrieves all users asynchronously.
+            </summary>
+            <returns>A list of user objects.</returns>
+        </member>
+        <member name="M:UserManagement.Data.UserRepository.GetUserByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user.</param>
+            <returns>The user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Data.UserRepository.UpdateUserAsync(UserManagement.Models.User)">
+            <summary>
+            Updates an existing user asynchronously.
+            </summary>
+            <param name="user">The user object with updated information.</param>
+            <returns>The updated user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Data.UserRepository.DeleteUserAsync(System.Guid)">
+            <summary>
+            Deletes a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user to delete.</param>
+            <returns>True if the user was deleted, false if not found.</returns>
+        </member>
+        <member name="T:UserManagement.Middleware.RequestResponseLoggingMiddleware">
+            <summary>
+            Middleware for logging HTTP requests and responses.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Middleware.RequestResponseLoggingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{UserManagement.Middleware.RequestResponseLoggingMiddleware})">
+            <summary>
+            Initializes a new instance of the <see cref="T:UserManagement.Middleware.RequestResponseLoggingMiddleware"/> class.
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+            <param name="logger">The logger instance for logging information.</param>
+        </member>
+        <member name="M:UserManagement.Middleware.RequestResponseLoggingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invokes the middleware to log HTTP request and response details.
+            </summary>
+            <param name="context">The HTTP context.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:UserManagement.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:UserManagement.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:UserManagement.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:UserManagement.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:UserManagement.Models.MinimumAgeAttribute">
+            <summary>
+            Custom validation attribute to validate the minimum age requirement.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Models.MinimumAgeAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UserManagement.Models.MinimumAgeAttribute"/> class.
+            </summary>
+            <param name="minimumAge">The minimum age required.</param>
+        </member>
+        <member name="M:UserManagement.Models.MinimumAgeAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates the specified value with respect to the current validation attribute.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="validationContext">The context information about the validation operation.</param>
+            <returns>An instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult"/> class.</returns>
+        </member>
+        <member name="T:UserManagement.Models.User">
+            <summary>
+            Simple User Model
+            </summary>
+        </member>
+        <member name="P:UserManagement.Models.User.Id">
+            <summary>
+            Gets or sets the unique identifier for the user.
+            </summary>
+        </member>
+        <member name="P:UserManagement.Models.User.FirstName">
+            <summary>
+            Gets or sets the first name of the user.
+            </summary>
+        </member>
+        <member name="P:UserManagement.Models.User.LastName">
+            <summary>
+            Gets or sets the last name of the user.
+            </summary>
+        </member>
+        <member name="P:UserManagement.Models.User.Email">
+            <summary>
+            Gets or sets the email address of the user.
+            </summary>
+        </member>
+        <member name="P:UserManagement.Models.User.DateOfBirth">
+            <summary>
+            Gets or sets the date of birth of the user.
+            </summary>
+        </member>
+        <member name="P:UserManagement.Models.User.PhoneNumber">
+            <summary>
+            Gets or sets the phone number of the user.
+            </summary>
+        </member>
+        <member name="P:UserManagement.Models.User.Age">
+            <summary>
+            Gets the age of the user calculated from the date of birth.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Models.User.ToString">
+            <summary>
+            Returns a string representation of the user.
+            </summary>
+            <returns>A string containing the user details.</returns>
+        </member>
+        <member name="M:UserManagement.Models.User.GetUsers(System.Collections.Generic.List{UserManagement.Models.User})">
+            <summary>
+            Returns a list of user details as strings.
+            </summary>
+            <param name="users">The list of users.</param>
+            <returns>A list of strings containing user details.</returns>
+        </member>
+        <member name="T:UserManagement.Models.UserDbContext">
+            <summary>
+            Database context for the User Management application.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Models.UserDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{UserManagement.Models.UserDbContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:UserManagement.Models.UserDbContext"/> class.
+            </summary>
+            <param name="options">Options for configuring the database context.</param>
+        </member>
+        <member name="P:UserManagement.Models.UserDbContext.Users">
+            <summary>
+            Gets or sets the DbSet representing the users in the database.
+            </summary>
+        </member>
+        <member name="T:UserManagement.Services.IUserService">
+            <summary>
+            Interface for user service that defines methods for user management operations.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Services.IUserService.CreateUserAsync(UserManagement.Models.User)">
+            <summary>
+            Creates a new user asynchronously.
+            </summary>
+            <param name="user">The user object to create.</param>
+            <returns>The created user object.</returns>
+        </member>
+        <member name="M:UserManagement.Services.IUserService.GetUsersAsync">
+            <summary>
+            Retrieves all users asynchronously.
+            </summary>
+            <returns>A list of user objects.</returns>
+        </member>
+        <member name="M:UserManagement.Services.IUserService.GetUserByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user.</param>
+            <returns>The user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Services.IUserService.UpdateUserAsync(System.Guid,UserManagement.Models.User)">
+            <summary>
+            Updates an existing user asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user to update.</param>
+            <param name="user">The user object with updated information.</param>
+            <returns>The updated user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Services.IUserService.DeleteUserAsync(System.Guid)">
+            <summary>
+            Deletes a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user to delete.</param>
+            <returns>True if the user was deleted, false if not found.</returns>
+        </member>
+        <member name="T:UserManagement.Services.UserService">
+            <summary>
+            Service layer for user management.
+            </summary>
+        </member>
+        <member name="F:UserManagement.Services.UserService._userRepository">
+            <summary>
+            The user repository for data operations.
+            </summary>
+        </member>
+        <member name="M:UserManagement.Services.UserService.#ctor(UserManagement.Data.IUserRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UserManagement.Services.UserService"/> class.
+            </summary>
+            <param name="userRepository">The user repository for data operations.</param>
+        </member>
+        <member name="M:UserManagement.Services.UserService.CreateUserAsync(UserManagement.Models.User)">
+            <summary>
+            Creates a new user asynchronously.
+            </summary>
+            <param name="user">The user object to create.</param>
+            <returns>The created user object.</returns>
+        </member>
+        <member name="M:UserManagement.Services.UserService.GetUsersAsync">
+            <summary>
+            Retrieves all users asynchronously.
+            </summary>
+            <returns>A list of user objects.</returns>
+        </member>
+        <member name="M:UserManagement.Services.UserService.GetUserByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user.</param>
+            <returns>The user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Services.UserService.UpdateUserAsync(System.Guid,UserManagement.Models.User)">
+            <summary>
+            Updates an existing user asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user to update.</param>
+            <param name="user">The user object with updated information.</param>
+            <returns>The updated user object, or null if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Services.UserService.DeleteUserAsync(System.Guid)">
+            <summary>
+            Deletes a user by their unique identifier asynchronously.
+            </summary>
+            <param name="id">The unique identifier of the user to delete.</param>
+            <returns>True if the user was deleted, false if not found.</returns>
+        </member>
+    </members>
+</doc>

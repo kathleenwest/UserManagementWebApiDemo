@@ -1,0 +1,211 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Simple User Management Api",
+    "description": "A simple user management api",
+    "contact": {
+      "name": "Kathleen West",
+      "url": "https://portfolio.katiegirl.net",
+      "email": "hello.kathleen.west@gmail.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/error": {
+      "get": {
+        "tags": [
+          "Error"
+        ],
+        "summary": "Handles errors and logs the relevant information.",
+        "operationId": "Error",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Creates a new user.\r\nPOST /api/users",
+        "operationId": "CreateUser",
+        "requestBody": {
+          "description": "The user object to create.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieves a list of all users.\r\nGET /api/users",
+        "operationId": "GetUsers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieves a user by their ID.\r\nGET /api/users/{id}",
+        "operationId": "GetUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Updates an existing user.\r\nPUT /api/users/{id}",
+        "operationId": "UpdateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user to update.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The user object with updated information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Deletes a user by their ID.\r\nDELETE /api/users/{id}",
+        "operationId": "DeleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user to delete.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "required": [
+          "dateOfBirth",
+          "email",
+          "firstName",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Gets or sets the unique identifier for the user.",
+            "format": "uuid"
+          },
+          "firstName": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string",
+            "description": "Gets or sets the first name of the user."
+          },
+          "lastName": {
+            "maxLength": 128,
+            "type": "string",
+            "description": "Gets or sets the last name of the user.",
+            "nullable": true
+          },
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Gets or sets the email address of the user.",
+            "format": "email"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "Gets or sets the date of birth of the user.",
+            "format": "date-time"
+          },
+          "phoneNumber": {
+            "maxLength": 10,
+            "minLength": 10,
+            "type": "string",
+            "description": "Gets or sets the phone number of the user.",
+            "format": "tel"
+          },
+          "age": {
+            "type": "integer",
+            "description": "Gets the age of the user calculated from the date of birth.",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Simple User Model"
+      }
+    }
+  }
+}
