@@ -334,6 +334,13 @@
             <param name="id">The unique identifier of the user to delete.</param>
             <returns>True if the user was deleted, false if not found.</returns>
         </member>
+        <member name="M:UserManagement.Services.IUserService.IsEmailUniqueAsync(System.String)">
+            <summary>
+            Checks if the provided email address is unique among the users.
+            </summary>
+            <param name="email">The email address to check for uniqueness.</param>
+            <returns>A boolean value indicating whether the email is unique (true) or already exists (false).</returns>
+        </member>
         <member name="T:UserManagement.Services.UserService">
             <summary>
             Service layer for user management.
@@ -384,6 +391,13 @@
             </summary>
             <param name="id">The unique identifier of the user to delete.</param>
             <returns>True if the user was deleted, false if not found.</returns>
+        </member>
+        <member name="M:UserManagement.Services.UserService.IsEmailUniqueAsync(System.String)">
+            <summary>
+            Checks if the provided email address is unique among the users.
+            </summary>
+            <param name="email">The email address to check for uniqueness.</param>
+            <returns>A boolean value indicating whether the email is unique (true) or already exists (false).</returns>
         </member>
     </members>
 </doc>

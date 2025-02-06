@@ -90,5 +90,19 @@ namespace UserManagement.Services
             // Delete the user using the user repository.
             return await _userRepository.DeleteUserAsync(id);
         }
+
+        /// <summary>
+        /// Checks if the provided email address is unique among the users.
+        /// </summary>
+        /// <param name="email">The email address to check for uniqueness.</param>
+        /// <returns>A boolean value indicating whether the email is unique (true) or already exists (false).</returns>
+        public async Task<bool> IsEmailUniqueAsync(string email)
+        {
+            // Retrieve a list of users with the specified email address.
+            List<User> usersWithEmail = await _userRepository.GetUsersByEmail(email);
+
+            // Return true if no users were found with the same email address, otherwise false.
+            return !usersWithEmail.Any();
+        }
     }
 }

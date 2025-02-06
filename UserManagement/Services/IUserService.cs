@@ -41,5 +41,12 @@ namespace UserManagement.Services
         /// <param name="id">The unique identifier of the user to delete.</param>
         /// <returns>True if the user was deleted, false if not found.</returns>
         Task<bool> DeleteUserAsync(Guid id);
+
+        /// <summary>
+        /// Checks if the provided email address is unique among the users.
+        /// </summary>
+        /// <param name="email">The email address to check for uniqueness.</param>
+        /// <returns>A boolean value indicating whether the email is unique (true) or already exists (false).</returns>
+        Task<bool> IsEmailUniqueAsync(string email);
     }
 }

@@ -230,5 +230,45 @@ namespace UserManagement.Tests.Services
             Assert.False(result);
             _mockUserRepository.Verify(repo => repo.DeleteUserAsync(userId), Times.Once);
         }
+
+        /// <summary>
+        /// Tests if IsEmailUniqueAsync returns true when the email is unique.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        [Fact]
+        public async Task IsEmailUniqueAsync_EmailIsUnique_ReturnsTrue()
+        {
+            // Arrange: Set up the email and mock repository to return an empty list of users
+            string email = "unique@example.com";
+            List<User> emptyUserList = new List<User>();
+            _mockUserRepository.Setup(repo => repo.GetUsersByEmail(email))
+                               .ReturnsAsync(emptyUserList);
+
+            // Act: Call the IsEmailUniqueAsync method with the unique email
+            bool result = await _userService.IsEmailUniqueAsync(email);
+
+            // Assert: Verify that the result is true, meaning the email is unique
+            Assert.True(result);
+        }
+
+        /// <summary>
+        /// Tests if IsEmailUniqueAsync returns false when the email is not unique.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        [Fact]
+        public async Task IsEmailUniqueAsync_EmailIsNotUnique_ReturnsFalse()
+        {
+            // Arrange: Set up the email and mock repository to return a list containing one user
+            string email = "duplicate@example.com";
+            List<User> usersWithDuplicateEmail = new List<User> { new User { Email = email } };
+            _mockUserRepository.Setup(repo => repo.GetUsersByEmail(email))
+                               .ReturnsAsync(usersWithDuplicateEmail);
+
+            // Act: Call the IsEmailUniqueAsync method with the duplicate email
+            bool result = await _userService.IsEmailUniqueAsync(email);
+
+            // Assert: Verify that the result is false, meaning the email is not unique
+            Assert.False(result);
+        }
     }
 }
