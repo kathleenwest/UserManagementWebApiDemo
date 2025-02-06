@@ -270,5 +270,8 @@ namespace UserManagement.Tests.Services
             // Assert: Verify that the result is false, meaning the email is not unique
             Assert.False(result);
         }
+
+        // TODO: Add more unit tests for the UserService class
+        // Add scenarios for ListUsersSameEmailAsync
     }
 }
