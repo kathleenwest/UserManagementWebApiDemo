@@ -50,6 +50,13 @@ namespace UserManagement.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Check if the email is unique.
+            bool isEmailUnique = await _userService.IsEmailUniqueAsync(user.Email);
+            if (!isEmailUnique)
+            {
+                return BadRequest("Email is already taken by another user.");
+            }
+
             // Create the user using the user service.
             User? createdUser = await _userService.CreateUserAsync(user);
 
@@ -108,6 +115,18 @@ namespace UserManagement.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            // Retrieve the list of users with the same email address.
+            List<User> users = await _userService.ListUsersSameEmailAsync(user.Email);
+
+            // Check if the incoming email is unique and matched to this user
+            foreach (User u in users)
+            {
+                if (u.Id != id)
+                {
+                    return BadRequest("Email is already taken by another user.");
+                }
             }
 
             // Update the user using the user service.

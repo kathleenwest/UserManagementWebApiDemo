@@ -44,6 +44,7 @@ namespace UserManagement.Tests.Controllers
             };
 
             _mockUserService.Setup(service => service.CreateUserAsync(newUser)).ReturnsAsync(newUser);
+            _mockUserService.Setup(service => service.IsEmailUniqueAsync(newUser.Email)).ReturnsAsync(true);
 
             // Act
             IActionResult result = await _controller.CreateUser(newUser);
@@ -83,6 +84,55 @@ namespace UserManagement.Tests.Controllers
             BadRequestObjectResult badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal(400, badRequestResult.StatusCode);
         }
+
+        /// <summary>
+        /// Tests if CreateUser returns a BadRequest when the email is not unique.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        [Fact]
+        public async Task CreateUser_EmailNotUnique_ReturnsBadRequest()
+        {
+            // Arrange
+            User user = new User { Email = "duplicate@example.com" };
+            _mockUserService.Setup(service => service.IsEmailUniqueAsync(user.Email))
+                            .ReturnsAsync(false); // Mock the IsEmailUniqueAsync method to return false
+
+            // Act
+            IActionResult result = await _controller.CreateUser(user);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(result); // Verify the result is a BadRequestObjectResult
+            BadRequestObjectResult? badRequestResult = result as BadRequestObjectResult;
+            Assert.Equal("Email is already taken by another user.", badRequestResult?.Value); // Verify the error message
+        }
+
+        /// <summary>
+        /// Tests if CreateUser returns CreatedAtAction when the email is unique.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        [Fact]
+        public async Task CreateUser_EmailIsUnique_ReturnsCreatedAtAction()
+        {
+            // Arrange
+            User user = new User { Email = "unique@example.com" };
+            _mockUserService.Setup(service => service.IsEmailUniqueAsync(user.Email))
+                            .ReturnsAsync(true); // Mock the IsEmailUniqueAsync method to return true
+            _mockUserService.Setup(service => service.CreateUserAsync(user))
+                            .ReturnsAsync(user); // Mock the CreateUserAsync method to return the user
+
+            // Act
+            IActionResult result = await _controller.CreateUser(user);
+
+            // Assert
+            Assert.IsType<CreatedAtActionResult>(result); // Verify the result is a CreatedAtActionResult
+            CreatedAtActionResult? createdAtActionResult = result as CreatedAtActionResult;
+            Assert.Equal(nameof(_controller.GetUserById), createdAtActionResult?.ActionName); // Verify the action name
+            Assert.Equal(user, createdAtActionResult?.Value); // Verify the user object
+        }
+
+        // TODO - This is the additional unit test scenario that needs to be implemented
+        // Add the additional unit test scenarios ideas
+        // CreateUser_ShouldReturnBadRequest_WhenUserModelIsInvalid X each User model property that requires validation
 
         /// <summary>
         /// Tests the GetUsers method to ensure it returns a list of users with a 200 OK status.
@@ -174,6 +224,9 @@ namespace UserManagement.Tests.Controllers
             // Setting up the mock to return the updated user when UpdateUserAsync is called with the specific userId and user object
             _mockUserService.Setup(service => service.UpdateUserAsync(userId, updatedUser)).ReturnsAsync(updatedUser);
 
+            // Setting up the mock to return the updated user when ListUsersSameEmailAsync is called with the specific Email
+            _mockUserService.Setup(service => service.ListUsersSameEmailAsync(updatedUser.Email)).ReturnsAsync(new List<User> { updatedUser});
+
             // Act
             IActionResult result = await _controller.UpdateUser(userId, updatedUser); // Calling UpdateUser method
 
@@ -199,6 +252,9 @@ namespace UserManagement.Tests.Controllers
             // Setting up the mock to return null when UpdateUserAsync is called with the specific userId and user object
             _mockUserService.Setup(service => service.UpdateUserAsync(userId, updatedUser)).ReturnsAsync((User?)null);
 
+            // Setting up the mock to return the updated user when ListUsersSameEmailAsync is called with the specific Email
+            _mockUserService.Setup(service => service.ListUsersSameEmailAsync(updatedUser.Email)).ReturnsAsync(new List<User> { updatedUser });
+
             // Act
             IActionResult result = await _controller.UpdateUser(userId, updatedUser); // Calling UpdateUser method
 
@@ -206,6 +262,11 @@ namespace UserManagement.Tests.Controllers
             NotFoundResult notFoundResult = Assert.IsType<NotFoundResult>(result); // Verifying the result type is NotFoundResult
             Assert.Equal(404, notFoundResult.StatusCode); // Asserting the status code is 404 Not Found
         }
+
+        // TODO - This is the additional unit test scenario that needs to be implemented
+        // Add the additional unit test scenarios ideas
+        // UpdateUser_ShouldReturnBadRequest_WhenUserModelIsInvalid X each User model property that requires validation
+        // UpdateUser_ShouldReturnBadRequest_WhenEmailIsNotUnique "Email is already taken by another user."
 
         /// <summary>
         /// Tests the DeleteUser method to ensure it returns a 204 No Content response when a user is successfully deleted.
@@ -250,6 +311,6 @@ namespace UserManagement.Tests.Controllers
             NotFoundResult notFoundResult = Assert.IsType<NotFoundResult>(result); // Verifying the result type is NotFoundResult
             Assert.Equal(404, notFoundResult.StatusCode); // Asserting the status code is 404 Not Found
         }
-
+    
     }
 }

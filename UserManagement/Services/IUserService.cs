@@ -48,5 +48,12 @@ namespace UserManagement.Services
         /// <param name="email">The email address to check for uniqueness.</param>
         /// <returns>A boolean value indicating whether the email is unique (true) or already exists (false).</returns>
         Task<bool> IsEmailUniqueAsync(string email);
+
+        /// <summary>
+        /// Get list of users that share the same e-mail address
+        /// </summary>
+        /// <param name="email">The email address to check for uniqueness.</param>
+        /// <returns>A list of users that share the same e-mail</returns>
+        Task<List<User>> ListUsersSameEmailAsync(string email);
     }
 }

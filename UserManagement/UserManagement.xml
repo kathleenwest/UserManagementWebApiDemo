@@ -341,6 +341,13 @@
             <param name="email">The email address to check for uniqueness.</param>
             <returns>A boolean value indicating whether the email is unique (true) or already exists (false).</returns>
         </member>
+        <member name="M:UserManagement.Services.IUserService.ListUsersSameEmailAsync(System.String)">
+            <summary>
+            Get list of users that share the same e-mail address
+            </summary>
+            <param name="email">The email address to check for uniqueness.</param>
+            <returns>A list of users that share the same e-mail</returns>
+        </member>
         <member name="T:UserManagement.Services.UserService">
             <summary>
             Service layer for user management.
@@ -398,6 +405,13 @@
             </summary>
             <param name="email">The email address to check for uniqueness.</param>
             <returns>A boolean value indicating whether the email is unique (true) or already exists (false).</returns>
+        </member>
+        <member name="M:UserManagement.Services.UserService.ListUsersSameEmailAsync(System.String)">
+            <summary>
+            Get list of users that share the same e-mail address
+            </summary>
+            <param name="email">The email address to check for uniqueness.</param>
+            <returns>A list of users that share the same e-mail</returns>
         </member>
     </members>
 </doc>

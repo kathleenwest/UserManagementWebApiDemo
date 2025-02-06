@@ -104,5 +104,19 @@ namespace UserManagement.Services
             // Return true if no users were found with the same email address, otherwise false.
             return !usersWithEmail.Any();
         }
+
+        /// <summary>
+        /// Get list of users that share the same e-mail address
+        /// </summary>
+        /// <param name="email">The email address to check for uniqueness.</param>
+        /// <returns>A list of users that share the same e-mail</returns>
+        public async Task<List<User>> ListUsersSameEmailAsync(string email)
+        {
+            // Retrieve a list of users with the specified email address.
+            List<User> usersWithSameEmail = await _userRepository.GetUsersByEmail(email);
+
+            // Return a list of users that share the same e-mail address
+            return usersWithSameEmail;
+        }
     }
 }
