@@ -2,10 +2,18 @@
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            // Add custom code for API testing here
-            // See demo that utilizes swagger
+            string url = "https://localhost:7048/api/users";
+            string response = await MyApiClient.GetApiResponseAsync(url);
+
+            if (response != null)
+            {
+                Console.WriteLine("API response:");
+                Console.WriteLine(response);
+                Console.ReadLine();
+            }
         }
     }
 }
+
