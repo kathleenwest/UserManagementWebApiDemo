@@ -1,5 +1,7 @@
 # User Management Web API
 
+![Picture of Project](./images/Title.jpg)
+
 ## Summary
 
 This repository contains a simple User Management Web API built with ASP.NET Core. The API provides CRUD operations for managing user data, including creating, retrieving, updating, and deleting users. The project uses Entity Framework Core with SQLite as the database provider and includes comprehensive unit tests for the controllers, services, and repository layers.
