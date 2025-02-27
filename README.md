@@ -4,6 +4,19 @@
 
 This repository contains a simple User Management Web API built with ASP.NET Core. The API provides CRUD operations for managing user data, including creating, retrieving, updating, and deleting users. The project uses Entity Framework Core with SQLite as the database provider and includes comprehensive unit tests for the controllers, services, and repository layers.
 
+## How to Try Out the Project Web API
+You can explore and test the functionality of our Project Web API through our Swagger interface. Follow these steps to get started:
+
+Access the Swagger UI: Open your web browser and navigate to the Swagger UI by clicking on this [link](http://user-management-demo.runasp.net/swagger/index.html).
+
+Explore the Endpoints: Browse through the available API endpoints listed in the Swagger interface. Each endpoint represents a different operation you can perform with the API.
+
+Test the API: To test an endpoint, select it from the list, and then click the "Try it out" button. Fill in any required parameters and click "Execute" to send a request to the API.
+
+View Responses: After executing a request, you can view the response details, including the status code, response body, and any headers returned by the API.
+
+The Swagger UI provides an intuitive way to interact with the API and understand its capabilities without writing any code. Feel free to explore and experiment with different endpoints to get a better understanding of how the API works.
+
 ## Requirements
 
 Refer to the [coding-challenge-requirements.pdf](requirements/coding-challenge-requirements.pdf) for detailed requirements.
