@@ -2,6 +2,27 @@
 
 ![Picture of Project](./images/Title.jpg)
 
+## Table of Contents
+- [User Management Web API](#user-management-web-api)
+  - [Table of Contents](#table-of-contents)
+  - [Summary](#summary)
+  - [How to Try Out the Project Web API](#how-to-try-out-the-project-web-api)
+  - [Requirements](#requirements)
+  - [Architecture](#architecture)
+    - [Project Structure](#project-structure)
+  - [Demo Video](#demo-video)
+  - [Building and Running the Solution](#building-and-running-the-solution)
+    - [Prerequisites](#prerequisites)
+    - [Building the Solution](#building-the-solution)
+    - [Running the Solution](#running-the-solution)
+  - [Database Migrations](#database-migrations)
+    - [Creating Migrations](#creating-migrations)
+    - [Deploying the SQLite Database](#deploying-the-sqlite-database)
+  - [Unit Tests](#unit-tests)
+    - [Running Unit Tests](#running-unit-tests)
+    - [Test Coverage](#test-coverage)
+  - [License](#license)
+
 ## Summary
 
 This repository contains a simple User Management Web API built with ASP.NET Core. The API provides CRUD operations for managing user data, including creating, retrieving, updating, and deleting users. The project uses Entity Framework Core with SQLite as the database provider and includes comprehensive unit tests for the controllers, services, and repository layers.
